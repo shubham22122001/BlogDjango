@@ -1,0 +1,53 @@
+
+  
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor page</title>
+    <link 
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <style>
+
+.content{
+        background-color: white;
+        padding: 30px;
+        padding-left:  100px;
+        padding-right:  100px;
+        border-radius: 23px;
+        border: 2px solid blue;
+        font-family: 'Varela Round', sans-serif;       
+        /* opacity: 0.5; */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
+
+   </style>
+</head>
+<body style="background: url({% static 'img/bg.jpg'%} );">
+
+    <div  class="content">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        <div >
+            <h1>Welcome</h1>
+            <h2><b>Doctor's Username :  {{ user.username }}</b></h2><hr>
+            Email: {{ user.email }}
+            <!-- <hr><a class="btn btn-primary" href="{% url 'logout_view' %}"" role="button">Logout</a> -->
+            <p><a href="{% url 'logout_view' %}">Log Out</a></p>
+        </div>
+        
+        {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'login_view' %}">Log In</a>
+        {% endif %}
+       
+    </div>
+</body>
+</html>
