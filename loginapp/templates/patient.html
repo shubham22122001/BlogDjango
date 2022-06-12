@@ -1,15 +1,18 @@
 
   
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor page</title>
+    <title>Patient page</title>
     <link 
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
    <style>
-       .content{
+
+.content{
         background-color: white;
         padding: 30px;
         padding-left:  100px;
@@ -27,20 +30,24 @@
 
    </style>
 </head>
-<body>
-    <body style="background: url({% static 'img/bg.jpg'%} );">
+<body style="background: url({% static 'img/bg.jpg'%} );">
 
+    <div  class="content">
+        {% csrf_token %}
         {% if user.is_authenticated %}
         <div >
             <h1>Welcome</h1>
-            <h2><b>Patient's Username: {{ user.username }}</b></h2>
-            Email: {{ user.email }}
-            <hr><p><a href="{% url 'logout_view' %}">Log Out</a></p>
+            <h2><b>Patient's Username :  {{ user.username }}</b></h2><hr>
+            Email: {{ user.email }}<br><br>
+            <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br><br>
+            <a class="btn btn-primary" href="{% url 'patient_blog' %}" role="button">View Blogs</a>
+
+            
         </div>
         
         {% else %}
         <p>You are not logged in</p>
-        <hr><a href="{% url 'login_view' %}">Log In</a>
+        <a href="{% url 'login_view' %}">Log In</a>
         {% endif %}
        
     </div>

@@ -1,0 +1,66 @@
+
+  
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog page</title>
+    <link 
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <style>
+body{
+    height:100%;
+}
+.content{
+        background-color: white;
+        {% comment %} height:100vh; {% endcomment %}
+        padding: 30px;
+        padding-left:  200px;
+        padding-right:  200px;
+        border-radius: 23px;
+        border: 2px solid blue
+        font-family: 'Varela Round', sans-serif;       
+        /* opacity: 0.5; */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        {% comment %} color:white; {% endcomment %}
+        }
+
+   </style>
+</head>
+<body style="background: url({% static 'img/bg.jpg'%} );">
+
+    <div  class="content">
+        {% csrf_token %}
+        {% if user.is_authenticated %}
+        <div class="container my-5">
+            <h2>Blogs</h2>
+            {% for post in allblogs  %}
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Article  by {{post.userName}}</strong>
+                    <h3 class="mb-0">{{post.title}}</h3>
+                    <p>{{post.category}}</p>
+                    <div class="mb-1 text-muted">{{post.summary| truncatechars:15 }}...</div>
+                    <p class="card-text mb-auto">{{post.content| truncatechars:255}}</p>
+                    <p>{{post.status}}</p>
+                      
+                
+            </div>
+
+        </div>
+        {% endfor %}
+                
+                <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br><br>
+
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

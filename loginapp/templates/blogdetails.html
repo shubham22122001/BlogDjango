@@ -1,0 +1,124 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"> 
+
+    <link 
+     rel="stylesheet"
+     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body{
+            height:100%;
+        }
+        .content{
+        background-color: white;
+        padding: 30px;
+        padding-left:  100px;
+        padding-right:  100px;
+        border-radius: 23px;
+        border: 2px solid blue;
+        font-family: 'Varela Round', sans-serif;       
+        /* opacity: 0.5; */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
+    </style>
+
+
+    <title> Blog Details</title>
+  </head>
+  <body style="background: url({% static 'img/bg.jpg'%} );">
+  
+      <div class="content">
+        <span class="mb-0 text-muted">
+            {% if msg %}
+                {{ msg | safe }}
+            {% else %}
+                
+            {% endif %}
+          </span>
+          <div class='i-am-centered'>
+            <h1><b>Blog Details</b></h1><hr>
+
+                <form  action="/blogdetails" method="POST">
+
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <div class="form-group first">
+                        <label for="userName">Username</label>
+                        
+                        <textarea rows="1" cols="10" name="userName" > {{user.username}}
+                        </textarea> 
+                    
+                        
+                    </div>
+                    <div class="form-group first">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="exampletext" name="title" placeholder="Enter title" Required>
+                    
+                    
+                    </div>
+                    <div class="form-group first">
+                        <label for="category">Category</label>
+                         <select id="category" name="Category">
+                            <option value="">Select</option>
+                            <option value="Mental Health">Mental Health</option>
+                            <option value="Heart Diease">Heart Diease</option>
+                            <option value="Covid19">Covid19</option>
+                            <option value="Immunization">Immunization</option>
+                        </select>
+                       
+                    </div>
+                    <div class="form-group first">
+                        <label for="summary">Summary</label>
+                        <textarea rows="4" cols="50" name="summary" >
+                        </textarea>
+                        
+                    </div>
+                    <div class="form-group last mb-4">
+                        <label for="content">Content</label>
+                        <textarea rows="4" cols="50" name="content" >
+                        </textarea>
+                    </div>
+                    <div class="form-group last mb-4">
+                        <label for="status">Status</label>
+                        <select id="status" name="status">
+                           <option value="">Select</option>
+                           <option value="Published">Published</option>
+                           <option value="Draft">Draft</option>
+                           
+                       </select>
+                      
+       
+                    </div>
+                    
+                    {% comment %} <div class='form-group last mb-4'>
+                        <label for="" class="form-label">Image</label>
+                        <input type="file" Required name="image" class="form-control">
+                    </div> {% endcomment %}
+                    
+                    <input type="submit"  value="Submit" class="btn btn-pill text-white btn-block btn-primary">
+                    {% endif %}
+                </form>
+                    
+                   
+                    
+            </div>
+
+      </div>                   
+
+              
+
+
+
+  </body>
+</html>

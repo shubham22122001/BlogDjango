@@ -1,0 +1,99 @@
+
+  
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog page</title>
+    <link 
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+   <style>
+
+.content{
+        background-color: white;
+        padding: 30px;
+        padding-left:  100px;
+        padding-right:  100px;
+        border-radius: 23px;
+        border: 2px solid blue;
+        font-family: 'Varela Round', sans-serif;       
+        /* opacity: 0.5; */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
+
+   </style>
+</head>
+<body style="background: url({% static 'img/bg.jpg'%} );">
+    
+    <div  class="content">
+        {% csrf_token %}
+        <h2>Blogs</h2>
+        <div class="container my-3">
+            
+            <h4>Mental Health</h4>
+
+            
+            {% for post in allment_health  %}
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-5 shadow-sm h-md-300 my-2 position-relative">
+                <div class="col p-5 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
+                    <h4 class="mb-0">{{post.title}}</h4><br>
+                    <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
+                   
+                </div>
+          
+                </div>
+        
+                {% endfor %}
+                <h4>Covid19</h4>
+                {% for post in allcovid  %}
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                    <div class="col p-5 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
+                        <h4 class="mb-0">{{post.title}}</h4><br>
+                        <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
+                       
+                    </div>
+              
+                    </div>
+            
+                    {% endfor %}
+                    <h4>Heart Diease</h4>
+                {% for post in allheart  %}
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                    <div class="col p-5 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
+                        <h4 class="mb-0">{{post.title}}</h4><br>
+                        <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
+                       
+                    </div>
+              
+                    </div>
+            
+                    {% endfor %}
+                    <h4>Immunization</h4>
+                {% for post in allimm  %}
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                    <div class="col p-5 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
+                        <h4 class="mb-0">{{post.title}}</h4><br>
+                        <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
+                       
+                    </div>
+              
+                    </div>
+            
+                    {% endfor %}
+                <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br><br>
+            
+            </div>
+    </div>
+</body>
+</html>

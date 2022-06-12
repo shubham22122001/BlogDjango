@@ -38,9 +38,14 @@
         <div >
             <h1>Welcome</h1>
             <h2><b>Doctor's Username :  {{ user.username }}</b></h2><hr>
-            Email: {{ user.email }}
-            <!-- <hr><a class="btn btn-primary" href="{% url 'logout_view' %}"" role="button">Logout</a> -->
-            <p><a href="{% url 'logout_view' %}">Log Out</a></p>
+            Email: {{ user.email }}<br><br>
+            <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br><br>
+            <a class="btn btn-primary" href="{% url 'blogdetails' %}" role="button">Add Blogs</a>
+            <a class="btn btn-primary" href="{% url 'blog' %}" role="button">View Blogs</a>
+
+            
+
+            
         </div>
         
         {% else %}
