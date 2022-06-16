@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+# from loginapp.views import doctor
+
 # Create your models here.
 class reg():
     fname = models.CharField()
@@ -29,4 +31,16 @@ class blog_data2(models.Model):
 
 
     def __str__(self):
-        return self.title + " by " + self.username
+        return self.title + " by " + self.userName
+
+class book1(models.Model):
+    userName=models.CharField(max_length=255)
+    doctor=models.CharField(max_length=255)
+    date=models.DateField()
+    start = models.TimeField()
+    end=models.TimeField()
+    speciality=models.CharField(max_length=255)
+
+
+    def __str__(self):
+        return self.userName

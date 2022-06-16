@@ -39,19 +39,18 @@
             
             <h4>Mental Health</h4>
 
-            
             {% for post in allment_health  %}
-            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-5 shadow-sm h-md-300 my-2 position-relative">
-                <div class="col p-5 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
-                    <h4 class="mb-0">{{post.title}}</h4><br>
-                    <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
-                   
-                </div>
-          
-                </div>
-        
-                {% endfor %}
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
+                    <div class="col p-5 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Blog  by {{post.userName}}</strong>
+                        <h4 class="mb-0">{{post.title}}</h4><br>
+                        <div class="mb-1">{{post.summary| truncatechars:15 }}...</div>
+                       
+                    </div>
+              
+                    </div>
+            
+                    {% endfor %}
                 <h4>Covid19</h4>
                 {% for post in allcovid  %}
                 <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">

@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog page</title>
+    <title>Doctors page</title>
     <link 
     rel="stylesheet"
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -38,19 +38,15 @@ body{
 
     <div  class="content">
         {% csrf_token %}
-        {% if user.is_authenticated %}
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
         <div class="container my-5">
-            <h2>Blogs</h2>
-            {% for post in allblogs  %}
+            <h2>Doctors available for an Appointment</h2>
+            {% for post in alldoctors  %}
             <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 my-4 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
-                    <strong class="d-inline-block mb-2 text-primary">Article  by {{post.userName}}</strong>
-                    <h3 class="mb-0">{{post.title}}</h3>
-                    <p>{{post.category}}</p>
-                    <div class="mb-1 text-muted">{{post.summary| truncatechars:15 }}...</div>
-                    <p class="card-text mb-auto">{{post.content| truncatechars:255}}</p><br>
-                    <p style: 'color:red;'>{{post.status}}</p>
-                      
+                    <strong class="d-inline-block mb-2 text-primary">Dr. {{post.userName}}</strong>
+                  
+                       <a class="btn btn-primary" href="{% url 'booking' %}" value={{post.userName}} name='book' role="button">Book</a><br><br>
                 
             </div>
 
@@ -60,7 +56,7 @@ body{
                 <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br><br>
 
         </div>
-        {% endif %}
+        {% comment %} {% endif %} {% endcomment %}
     </div>
 </body>
 </html>

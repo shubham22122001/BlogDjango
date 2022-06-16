@@ -1,0 +1,143 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet"> 
+
+    <link 
+     rel="stylesheet"
+     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        body{
+            height:100%;
+        }
+        .content{
+        background-color: white;
+        padding: 30px;
+        padding-left:  100px;
+        padding-right:  100px;
+        border-radius: 23px;
+        border: 2px solid blue;
+        font-family: 'Varela Round', sans-serif;       
+        /* opacity: 0.5; */
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        }
+    </style>
+
+
+    <title> Book Appointment</title>
+  </head>
+  <body style="background: url({% static 'img/bg.jpg'%} );">
+  
+      <div class="content">
+        <span class="mb-0 text-muted">
+            {% if msg %}
+                {{ msg | safe }}
+            {% else %}
+                
+            {% endif %}
+          </span>
+          <div class='i-am-centered'>
+            <h1><b>Booking Details</b></h1><hr>
+
+                <form  action="/booking" method="POST">
+
+                    {% csrf_token %}
+                    {% if user.is_authenticated %}
+                    <div class="form-group first">
+                        <label for="userName">Username</label>
+                        
+                        <textarea rows="1" cols="10" name="userName" > {{user.username}}
+                        </textarea> 
+                    
+                    
+                        
+                    </div>
+                    
+                    <div class="form-group first">
+                        <label for="doctor">Doctor's Username</label>
+                        <select id="doctor" name="doctor">
+                            <option value="">Select</option>
+
+                            {% for post in alldoctors  %}
+                            <option value={{post.userName}}>{{post.userName}}</option>
+                            {% endfor %}
+                        </select>
+                       
+                    </div>
+                    <div class="form-group first">
+                        <label for="date">Requirement Speciality</label>
+                        <input type="text" class="form-control" id="exampletext" name="speciality" placeholder="Enter Speicality" Required>
+                    
+                    
+                    </div>
+                    
+
+                    <div class="form-group first">
+                        <label for="date">Date of Appointment</label>
+                        <input type="date" class="form-control" id="exampletext" name="date"  Required>
+                    
+                    
+                    </div>
+                    <div class="form-group first">
+                        <label for="startTime">Start Time</label>
+                        <input type="time"  class="form-control" id="start" name="start">
+                        
+                       
+                    </div>
+                   
+                    <div class="form-group first">
+                        <label for="startTime">End Time</label>
+                        <input type="time"  class="form-control" id="end" name="end">
+                        
+                       
+                    </div>
+                   
+                    
+                   
+                    
+                    <input type="submit"  value="Confirm" class="btn btn-pill text-white btn-block btn-primary"><br>
+                    <a class="btn btn-primary" href="{% url 'logout_view' %}" role="button">Logout</a><br>
+                    {% endif %}
+                </form>
+                    
+                   
+                    
+            </div>
+
+      </div>                   
+
+              
+
+<script>
+    $( document ).ready(function() {
+        $('#start').on('input', function () {
+               //var convertDuration = minuteToHours(6);
+               const now = new Date();
+               const [hour, minutes] = $(this).val().split(":");
+               now.setHours(hour);
+               now.setMinutes(minutes);
+               const newDate = addMinutes(now, 45);
+               $('#end').val(`${newDate.getHours().toString().padStart(2, 0)}:${newDate.getMinutes().toString().padStart(2, 0)}`);
+           });
+   });
+   
+   function addMinutes(date, minutes) {
+     const minuteInMillisecons = minutes * 1000 * 60;
+     const newDate = new Date(date.valueOf() + minuteInMillisecons);
+     return newDate;
+   }
+</script>
+
+  </body>
+</html>

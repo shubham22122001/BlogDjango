@@ -1,13 +1,14 @@
 from unicodedata import category
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.models import User
 # from login.settings import LOGIN_REDIRECT_URL
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from loginapp.models import blog_data2
-
+from django.db.models import F
+from loginapp.models import book1
 
 def index(request):
     return render(request, 'index.html')
@@ -82,7 +83,8 @@ def blogdetails(request):
 
 @login_required(login_url='login_view')
 def blog(request): 
-
+    # username = request.user.username
+    # form1 = LoginForm(request.POST or None)
 
     allblogs = blog_data2.objects.all()
 
@@ -101,3 +103,32 @@ def patient_blog(request):
 
     context={'allment_health': allment_health,'allcovid':allcovid,'allheart':allheart,'allimm':allimm}
     return render(request, "patient_blog.html",context)
+
+def doctors_list(request):
+    alldoctors=blog_data2.objects.values('userName').distinct()
+    context={'alldoctors':alldoctors}
+    # name=request.
+    return render(request, "doctors_list.html",context)
+
+def booking(request):
+    alldoctors=blog_data2.objects.values('userName').distinct()
+    context={'alldoctors':alldoctors}
+    if request.method=='POST':
+        print('This is post')
+        userName=request.POST['userName']
+        doctor=request.POST['doctor']
+        date=request.POST['date']
+        start=request.POST['start']
+        end=request.POST['end']
+        speciality=request.POST['speciality']
+        ins2=book1(userName=userName,doctor=doctor,date=date,start=start,end=end,speciality=speciality)
+        ins2.save()
+        print('data stored')
+        return redirect('/display')
+    return render(request,"booking.html",context)
+
+def display(request):
+    allapp = book1.objects.all()
+
+    context={'allapp': allapp}
+    return render(request, "display.html", context)
